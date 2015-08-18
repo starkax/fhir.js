@@ -15,7 +15,7 @@ search = ({baseUrl, http, type, query, success, error}) =>
 
 getRel = (rel)->
   ({baseUrl, http, bundle, success, error}) ->
-    urls = (l.href for l in bundle?.link when l.rel is rel)
+    urls = (l.url for l in bundle?.link when l.relation is rel)
     if urls.length != 1
       error "No #{rel} link found in bundle"
     else

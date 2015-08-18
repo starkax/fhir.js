@@ -49,6 +49,8 @@ module.exports = (config)->
 
   [
     "search"
+    "nextPage"
+    "prevPage"
     "conformance"
     "document"
     "profile"
