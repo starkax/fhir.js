@@ -63,10 +63,18 @@
 
                 var resolvedReferences = {};
 
-                var queue = [function() {ret.resolve(results, resolvedReferences);}];
+                var queue = [function() {
+                    var entries = results.data.entry || [];
+                    var res = entries.map(function(r){
+                        return r.resource;
+                    });
+                    ret.resolve(res,resolvedReferences);
+                }];
                 
                 function enqueue (bundle,resource,reference) {
-                  queue.push(function() {resolveReference(bundle,resource,reference)});
+                  queue.push(function() {
+                    resolveReference(bundle,resource,reference);
+                  });
                 }
 
                 function next() {
@@ -109,7 +117,7 @@
           
         return ret.promise;
     };
-    
+
     function decorate (client, newAdapter) {
         fhirAPI = client;
         adapter = newAdapter;
