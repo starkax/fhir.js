@@ -68,8 +68,22 @@
                     var res = entries.map(function(r){
                         return r.resource;
                     });
-                    ret.resolve(res,resolvedReferences);
+                    var refs = function (resource, reference) {
+                        var refID = normalizeRefID(resource,reference);
+                        return resolvedReferences[refID];
+                    };
+                    ret.resolve(res,refs);
                 }];
+
+                function normalizeRefID (resource, reference) {
+                    var refID = reference.reference;
+                    if (refID.startsWith('#')) {
+                        var resourceID = resource.resourceType + "/" + resource.id;
+                        return resourceID + refID;
+                    } else {
+                        return refID;
+                    }
+                }
                 
                 function enqueue (bundle,resource,reference) {
                   queue.push(function() {
@@ -82,10 +96,10 @@
                 }
 
                 function resolveReference (bundle,resource,reference) {
-                    var referenceID = reference.reference;
+                    var refID = normalizeRefID(resource,reference);
                     fhirAPI.resolve({'bundle': bundle, 'resource': resource, 'reference':reference}).then(function(res){
                       var referencedObject = res.data || res.content;
-                      resolvedReferences[referenceID] = referencedObject;
+                      resolvedReferences[refID] = referencedObject;
                       next();
                     });
                 }
