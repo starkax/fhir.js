@@ -9,7 +9,9 @@
         return prov = {
             $get: function($http, $q) {
                 var adapter = {http: $http, defer: $q.defer};
-                return mkFhir(prov, adapter);
+                return function(prov, adapter){ 
+                        return mkFhir(prov, adapter);
+                    };
             }
         };
     });

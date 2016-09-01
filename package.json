@@ -31,7 +31,7 @@
 
     "all-tests": "npm run test  && npm run integrate",
 
-    "build": "rm -rf dist && `npm bin`/webpack --progress --colors && `npm bin`/coffee --output lib --compile src"
+    "build": "rmdir /s /q dist && webpack --progress --colors && coffee --output lib --compile src"
   },
   "keywords": [
     "fhir",
