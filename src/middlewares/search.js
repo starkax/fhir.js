@@ -24,7 +24,8 @@
         $exact: ':exact',
         $missing: ':missing',
         $null: ':missing',
-        $text: ':text'
+        $text: ':text',
+        $in: ':in'
     };
 
     var isOperator = function(v) {
