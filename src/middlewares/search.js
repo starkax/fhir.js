@@ -14,8 +14,8 @@
     var OPERATORS = {
         $gt: 'gt',
         $lt: 'lt',
-        $lte: 'lte',
-        $gte: 'gte'
+        $le: 'le',
+        $ge: 'ge'
     };
 
     var MODIFIERS = {
